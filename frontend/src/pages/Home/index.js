@@ -53,3 +53,11 @@ export default function Home() {
     </Container>
   );
 }
+
+fetch('http://localhost:3000')
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
