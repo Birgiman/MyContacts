@@ -28,6 +28,7 @@
       "react/react-in-jsx-scope": "off",
       "import/prefer-default-export": "off",
       "react/jsx-no-bind": "off",
+      "class-methods-use-this": "off",
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn"
     }
