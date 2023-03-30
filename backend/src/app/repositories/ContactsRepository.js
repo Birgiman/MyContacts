@@ -46,7 +46,7 @@ class ContactsRepository {
   }
 
   async delete(id) {
-    const deleteOp = await db.query('DELETE FROM contacts WHERE id = $1', [id])
+    const deleteOp = await db.query(`DELETE FROM contacts WHERE id = $1 RETURNING *`, [id])
     return deleteOp;
   }
 
