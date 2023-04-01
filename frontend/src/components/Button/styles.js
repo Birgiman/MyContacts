@@ -24,8 +24,9 @@ export const StyledButton = styled.button`
   }
 
   &[disabled] {
-    background: #ccc;
-    cursor: default;
+    background: #ccc !important;
+    cursor: default !important;
+    min-width: 92.66px;
   }
 
   ${({ theme, danger }) => danger && css`
