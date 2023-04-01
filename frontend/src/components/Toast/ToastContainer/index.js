@@ -1,11 +1,12 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
 import ToastMessage from '../ToastMessage';
 
 import { Container } from './styles';
 import { toastEventManager } from '../../../utils/toast';
+import useSafeAsyncState from '../../../hooks/useSafeAsyncState';
 
 export default function ToastContainer() {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useSafeAsyncState([]);
 
   useEffect(() => {
     function handleAddToast(payload) {
@@ -20,17 +21,13 @@ export default function ToastContainer() {
     }
 
     toastEventManager.on('addtoast', handleAddToast);
-
-    return () => {
-      toastEventManager.removeListener('addtoast', handleAddToast);
-    };
-  }, []);
+  }, [setMessages]);
 
   const handleRemoveMessage = useCallback((id) => {
     setMessages((prevState) => prevState.filter(
       (message) => message.id !== id,
     ));
-  }, []);
+  }, [setMessages]);
 
   return (
     <Container>
