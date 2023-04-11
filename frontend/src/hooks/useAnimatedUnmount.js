@@ -16,9 +16,7 @@ export default function useAnimatedUnmount(visible) {
 
     const elementRef = animatedElementRef.current;
     if (!visible && elementRef) {
-      elementRef.addEventListener('animationend', () => {
-        setShouldRender(false);
-      });
+      elementRef.addEventListener('animationend', handleAnimationEnd);
     }
 
     return () => {
@@ -27,6 +25,7 @@ export default function useAnimatedUnmount(visible) {
       }
     };
   }, [visible]);
+
   return {
     shouldRender,
     animatedElementRef,
