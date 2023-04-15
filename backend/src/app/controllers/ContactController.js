@@ -2,20 +2,20 @@ const ContactsRepository = require('../repositories/ContactsRepository')
 const isValidUUID = require('../utils/isValidUUID')
 
 class ContactController {
-  async index(req, res) {
-    const { orderBy } = req.query;
-    const contacts = await ContactsRepository.findAll(orderBy);
+  async index (req, res) {
+    const { orderBy } = req.query
+    const contacts = await ContactsRepository.findAll(orderBy)
     res.json(contacts)
   }
 
-  async show(req, res) {
+  async show (req, res) {
     const { id } = req.params
 
     if (!isValidUUID(id)) {
       return res.status(400).json({ error: 'Invalid contact id' })
     }
 
-    const contact = await ContactsRepository.findById(id);
+    const contact = await ContactsRepository.findById(id)
 
     if (!contact) {
       return res.status(404).json({ error: 'Contact not found' })
@@ -24,7 +24,7 @@ class ContactController {
     res.json(contact)
   }
 
-  async store(req, res) {
+  async store (req, res) {
     const { name, email, phone, category_id } = req.body
 
     if (!name) {
@@ -46,15 +46,14 @@ class ContactController {
       name,
       email: email || null,
       phone,
-      category_id: category_id || null,
+      category_id: category_id || null
     })
 
     res.status(201).json(contact)
-
   }
 
-  async update(req, res) {
-    const { id } = req.params;
+  async update (req, res) {
+    const { id } = req.params
     const { name, email, phone, category_id } = req.body
 
     if (!isValidUUID(id)) {
@@ -69,7 +68,7 @@ class ContactController {
       return res.status(400).json({ error: 'You should send a name' })
     }
 
-    const contactExist = await ContactsRepository.findById(id);
+    const contactExist = await ContactsRepository.findById(id)
     if (!contactExist) {
       return res.status(400).json({
         error: 'This contact doesnt exists'
@@ -77,7 +76,7 @@ class ContactController {
     }
 
     if (email) {
-      const contactByEmail = await ContactsRepository.findByEmail(email);
+      const contactByEmail = await ContactsRepository.findByEmail(email)
       if (contactByEmail && contactByEmail.id !== id) {
         return res.status(400).json({ error: 'This e-mail is already in use' })
       }
@@ -93,7 +92,7 @@ class ContactController {
     res.json(contact)
   }
 
-  async delete(req, res) {
+  async delete (req, res) {
     const { id } = req.params
 
     if (!isValidUUID(id)) {
@@ -105,4 +104,4 @@ class ContactController {
   }
 }
 
-module.exports = new ContactController();
+module.exports = new ContactController()

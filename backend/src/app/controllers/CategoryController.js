@@ -1,27 +1,26 @@
-const CategoriesRepository = require('../repositories/CategoriesRepository');
+const CategoriesRepository = require('../repositories/CategoriesRepository')
 
 class CategoryController {
-
-  async store(req, res) {
-    const { name } = req.body;
+  async store (req, res) {
+    const { name } = req.body
 
     if (!name) {
       return res.status(400).json({ error: 'You should send a name' })
     }
 
-    const category = await CategoriesRepository.create({ name });
+    const category = await CategoriesRepository.create({ name })
 
     res.status(201).json(category)
   }
 
-  async index(req, res) {
-    const categories = await CategoriesRepository.findAll();
-    res.json(categories);
+  async index (req, res) {
+    const categories = await CategoriesRepository.findAll()
+    res.json(categories)
   }
 
-  async show(req, res) {
-    const { id } = req.params;
-    const category = await CategoriesRepository.findById(id);
+  async show (req, res) {
+    const { id } = req.params
+    const category = await CategoriesRepository.findById(id)
 
     if (!category) {
       return res.status(404).json({ error: 'Category not found' })
@@ -30,28 +29,28 @@ class CategoryController {
     res.json(category)
   }
 
-  async delete(req, res) {
-    const { id } = req.params;
-    await CategoriesRepository.delete(id);
-    res.sendStatus(204);
+  async delete (req, res) {
+    const { id } = req.params
+    await CategoriesRepository.delete(id)
+    res.sendStatus(204)
   }
 
-  async update(req, res) {
-    const { id } = req.params;
-    const { name } = req.body;
+  async update (req, res) {
+    const { id } = req.params
+    const { name } = req.body
 
-    const categoryExist = await CategoriesRepository.findById(id);
+    const categoryExist = await CategoriesRepository.findById(id)
     if (!categoryExist) {
-      return res.status(400).json({ error: 'This category doesnt exists' });
+      return res.status(400).json({ error: 'This category doesnt exists' })
     }
 
     if (!name) {
-      return res.status(400).json({ error: 'You should send a name to update' });
+      return res.status(400).json({ error: 'You should send a name to update' })
     }
 
-    const category = await CategoriesRepository.update(id, name);
+    const category = await CategoriesRepository.update(id, name)
 
-    res.json(category);
+    res.json(category)
   }
 }
 

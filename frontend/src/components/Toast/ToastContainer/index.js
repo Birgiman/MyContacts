@@ -13,16 +13,17 @@ export default function ToastContainer() {
   } = useAnimatedList();
 
   useEffect(() => {
-    function handleAddToast(payload) {
-      const { type, text, duration } = payload;
-
+    const handleAddToast = ({ type, text, duration }) => {
       setMessages((prevState) => [
         ...prevState,
         {
-          id: Math.random(), type, text, duration,
+          id: Math.random(),
+          type,
+          text,
+          duration,
         },
       ]);
-    }
+    };
 
     toastEventManager.on('addtoast', handleAddToast);
 

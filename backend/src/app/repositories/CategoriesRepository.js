@@ -1,22 +1,22 @@
-const db = require('../../database');
+const db = require('../../database')
 
 class CategoriesRepository {
-  async create({ name }) {
+  async create ({ name }) {
     const [row] = await db.query(`
       INSERT INTO categories(name)
       VALUES($1)
       RETURNING *
-    `, [name]);
+    `, [name])
 
-    return row;
+    return row
   }
 
-  async findAll() {
-    const rows = await db.query('SELECT * FROM categories ORDER BY name');
-    return rows;
+  async findAll () {
+    const rows = await db.query('SELECT * FROM categories ORDER BY name')
+    return rows
   }
 
-  async findById(id) {
+  async findById (id) {
     const [row] = await db.query(`
       SELECT *
       FROM categories
@@ -26,34 +26,31 @@ class CategoriesRepository {
     return row
   }
 
-  async delete(id) {
+  async delete (id) {
     await db.query(`
       UPDATE contacts
       SET category_id = NULL
       WHERE category_id = $1
-    `, [id]);
+    `, [id])
 
     const deleteOp = await db.query(`
       DELETE FROM categories
       WHERE id = $1
-    `, [id]);
+    `, [id])
 
-    return deleteOp;
+    return deleteOp
   }
 
-
-  async update(id, name) {
-
+  async update (id, name) {
     const [row] = await db.query(`
       UPDATE categories
       SET name = $1
       WHERE id = $2
       RETURNING *
-    `, [name, id]);
+    `, [name, id])
 
-    return row;
+    return row
   }
-
 }
 
-module.exports = new CategoriesRepository();
+module.exports = new CategoriesRepository()
