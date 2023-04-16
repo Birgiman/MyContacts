@@ -26,8 +26,34 @@ export default function useNewContact() {
     }
   }
 
+  // async function handleMultipleSubmit(contact) {
+  //   try {
+  //     const promises = [];
+
+  //     for (let i = 0; i < 1000; i += 1) {
+  //       const promise = handleSubmit(contact);
+  //       promises.push(promise);
+  //     }
+
+  //     await Promise.all(promises);
+  //   } catch {
+  //     toast({
+  //       type: 'danger',
+  //       text: 'Ocorreu um erro ao cadastrar os contatos!',
+  //       duration: 7000,
+  //     });
+  //   } finally {
+  //     toast({
+  //       type: 'success',
+  //       text: 'Todos os contatos foram cadastrados com sucesso!',
+  //       duration: 5000,
+  //     });
+  //   }
+  // }
+
   return {
     contactFormRef,
     handleSubmit,
+    // handleMultipleSubmit,
   };
 }

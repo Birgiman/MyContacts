@@ -6,6 +6,7 @@ export default function NewContact() {
   const {
     contactFormRef,
     handleSubmit,
+    // handleMultipleSubmit,
   } = useNewContact();
 
   return (
