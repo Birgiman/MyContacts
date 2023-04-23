@@ -7,24 +7,53 @@ import edit from '../../../../assets/images/icons/edit.svg';
 import trash from '../../../../assets/images/icons/trash.svg';
 
 import { ListHeader, Card } from './styles';
+import Select from '../../../../components/Select';
 
 function ContactsList({
   filteredContacts,
   orderBy,
   onToggleOrderBy,
   onDeleteContact,
+  onToggleOrderByCategory,
+  categories,
+  selectedCategory,
+  isLoadingCategories,
 }) {
   return (
     <>
 
-      {filteredContacts.length > 0 && (
-        <ListHeader orderBy={orderBy}>
-          <button type="button" onClick={onToggleOrderBy}>
-            <span>Nome</span>
-            <img src={arrow} alt="Arrow" />
-          </button>
-        </ListHeader>
-      )}
+      <ListHeader
+        orderBy={orderBy}
+        filteredContacts={filteredContacts}
+      >
+        <button
+          type="button"
+          onClick={onToggleOrderBy}
+          disabled={filteredContacts.length === 0}
+        >
+          <span>Nome</span>
+          <img src={arrow} alt="Arrow" />
+        </button>
+
+        <Select
+          value={selectedCategory}
+          onChange={onToggleOrderByCategory}
+          disabled={isLoadingCategories}
+        >
+          <option value="all">Todas as categorias</option>
+          <option value="empty">Sem categoria</option>
+
+          {categories.map((category) => (
+            <option
+              key={category.id}
+              value={category.id}
+            >
+              {category.name}
+            </option>
+          ))}
+        </Select>
+
+      </ListHeader>
 
       {filteredContacts.map((contact) => (
         <Card key={contact.id}>
@@ -67,6 +96,13 @@ ContactsList.propTypes = {
   orderBy: PropTypes.string.isRequired,
   onToggleOrderBy: PropTypes.func.isRequired,
   onDeleteContact: PropTypes.func.isRequired,
+  onToggleOrderByCategory: PropTypes.func.isRequired,
+  categories: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  })),
+  isLoadingCategories: PropTypes.bool.isRequired,
+  selectedCategory: PropTypes.string.isRequired,
 };
 
 export default memo(ContactsList);

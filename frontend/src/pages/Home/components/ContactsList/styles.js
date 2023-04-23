@@ -3,22 +3,50 @@ import styled from 'styled-components';
 export const ListHeader = styled.header`
   margin-top: 24px;
   margin-bottom: 8px;
+  display: flex;
+
     button {
     background: transparent;
     border: none;
     display: flex;
     align-items: center;
 
+    &[disabled] {
+      cursor: default;
+    }
+
+
     span {
       margin-right: 8px;
       font-weight: bold;
-      color: ${({ theme }) => theme.colors.primary.main};
+      color: ${({ filteredContacts, theme }) => (
+    filteredContacts.length === 0 ? theme.colors.gray[200] : theme.colors.primary.main
+  )};
     }
 
     img {
+      filter: ${({ filteredContacts }) => (
+    filteredContacts.length === 0 ? 'grayscale(100%)' : 'none'
+  )};
       transform: ${({ orderBy }) => (orderBy === 'asc' ? 'rotate(180deg)' : 'rotate(0deg)')};
       transition: transform 0.2s ease-in;
     }
+  }
+
+  Select {
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    color: ${({ theme }) => theme.colors.primary.main};
+    box-shadow: none;
+    font-weight: bold;
+    font-size: 14px;
+    height: 30px;
+    max-width: 180px;
+    padding: 0;
+    margin-left: 16px;
+    cursor: pointer;
   }
 `;
 

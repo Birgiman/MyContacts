@@ -34,6 +34,11 @@ export default function Home() {
     handleDeleteContact,
     handleCloseDeleteModal,
     handleDeleteConfirmContact,
+    handleToggleOrderByCategory,
+    selectedCategory,
+    setCategories,
+    isLoadingCategories,
+    categories,
   } = useHome();
 
   const hasContacts = contacts.length > 0;
@@ -60,7 +65,6 @@ export default function Home() {
 
       {hasError && <ErrorStatus onTryAgain={handleTryAgain} />}
       {isListEmpty && <EmptyList />}
-      {isSearchEmpty && <SearchNotFound searchTerm={searchTerm} />}
 
       {hasContacts && (
       <>
@@ -69,8 +73,17 @@ export default function Home() {
           filteredContacts={filteredContacts}
           orderBy={orderBy}
           onToggleOrderBy={handleToggleOrderBy}
+          onToggleOrderByCategory={handleToggleOrderByCategory}
+          selectedCategory={selectedCategory}
           onDeleteContact={handleDeleteContact}
+          setCategories={setCategories}
+          isLoadingCategories={isLoadingCategories}
+          categories={categories}
         />
+          {/* {console.log('IndexHome', { selectedCategory })}
+          {console.log('IndexHome', { atualizaCategoria })}
+          {console.log('IndexHome', { isLoadingCategories })} */}
+        {isSearchEmpty && <SearchNotFound searchTerm={searchTerm} />}
 
         <Modal
           danger

@@ -39,7 +39,7 @@ export default function useNewContact() {
   //   } catch {
   //     toast({
   //       type: 'danger',
-  //       text: 'Ocorreu um erro ao cadastrar os contatos!',
+  //       text: 'Ocorreu os contatos!',
   //       duration: 7000,
   //     });
   //   } finally {

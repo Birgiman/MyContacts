@@ -7,6 +7,7 @@ import {
 import ContactsService from '../../services/ContactsService';
 
 import toast from '../../utils/toast';
+import CategoriesService from '../../services/CategoriesService';
 
 export default function useHome() {
   const [contacts, setContacts] = useState([]);
@@ -17,12 +18,60 @@ export default function useHome() {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
   const [contactBeingDeleted, setContactBeingDeleted] = useState(null);
   const [isLoadingDelete, setIsLoadingDelete] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [isLoadingCategories, setIsLoadingCategories] = useState(true);
 
   const deferredSeacrhTerm = useDeferredValue(searchTerm);
 
-  const filteredContacts = useMemo(() => contacts.filter((contact) => (
-    contact.name.toLowerCase().includes(deferredSeacrhTerm.toLowerCase())
-  )), [contacts, deferredSeacrhTerm]);
+  const filteredContacts = useMemo(() => {
+    setIsLoading(true);
+
+    const filteredByName = contacts.filter((contact) => (
+      contact.name.toLowerCase().includes(deferredSeacrhTerm.toLowerCase())
+    ));
+
+    const filteredByCategory = selectedCategory === 'all'
+      ? filteredByName
+      : selectedCategory === 'empty'
+        ? filteredByName.filter((contact) => !contact.category.id)
+        : filteredByName.filter((contact) => contact.category.id === selectedCategory);
+
+    setIsLoading(false);
+
+    return filteredByCategory;
+  }, [contacts, deferredSeacrhTerm, selectedCategory]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadCategories() {
+      try {
+        const categoriesList = await CategoriesService.listCategories(controller.signal);
+
+        setCategories(categoriesList);
+      } catch {
+      } finally {
+        setIsLoadingCategories(false);
+      }
+    }
+
+    loadCategories();
+
+    return () => {
+      controller.abort();
+    };
+  }, [setCategories, setIsLoadingCategories]);
+
+  const handleToggleOrderByCategory = useCallback((event) => {
+    const selectedValue = event.target.value;
+
+    if (selectedValue === selectedCategory) {
+      return;
+    }
+
+    setSelectedCategory(selectedValue);
+  }, [selectedCategory]);
 
   const loadContacts = useCallback(async (signal) => {
     try {
@@ -55,15 +104,16 @@ export default function useHome() {
     };
   }, [loadContacts]);
 
+  function handleChangeSearchTerm(event) {
+    setIsLoading(true);
+    setSearchTerm(event.target.value);
+  }
+
   const handleToggleOrderBy = useCallback(() => {
     setOrderBy(
       (prevState) => (prevState === 'asc' ? 'desc' : 'asc'),
     );
   }, []);
-
-  function handleChangeSearchTerm(event) {
-    setSearchTerm(event.target.value);
-  }
 
   function handleTryAgain() {
     loadContacts();
@@ -119,5 +169,9 @@ export default function useHome() {
     orderBy,
     handleToggleOrderBy,
     handleDeleteContact,
+    handleToggleOrderByCategory,
+    isLoadingCategories,
+    selectedCategory,
+    categories,
   };
 }
