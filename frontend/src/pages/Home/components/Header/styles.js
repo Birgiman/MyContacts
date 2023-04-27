@@ -14,7 +14,6 @@ export const ContactsContainer = styled.div`
   align-items: center;
   justify-content: center;
 
-
     .all-contacts {
 
     font-size: 24px;
@@ -33,7 +32,11 @@ export const ContactsContainer = styled.div`
     color: ${({ theme }) => theme.colors.gray[500]};
   }
 `;
+
 export const LinkContainer = styled.div`
+
+  margin-bottom: 16px;
+
   a {
     color: ${({ theme }) => theme.colors.primary.main};
     text-decoration: none;

@@ -21,6 +21,7 @@ export default function useHome() {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [isLoadingCategories, setIsLoadingCategories] = useState(true);
+  const [isSideBarVisible, setIsSideBarVisible] = useState(false);
 
   const deferredSeacrhTerm = useDeferredValue(searchTerm);
 
@@ -63,16 +64,6 @@ export default function useHome() {
     };
   }, [setCategories, setIsLoadingCategories]);
 
-  const handleToggleOrderByCategory = useCallback((event) => {
-    const selectedValue = event.target.value;
-
-    if (selectedValue === selectedCategory) {
-      return;
-    }
-
-    setSelectedCategory(selectedValue);
-  }, [selectedCategory]);
-
   const loadContacts = useCallback(async (signal) => {
     try {
       setIsLoading(true);
@@ -104,6 +95,16 @@ export default function useHome() {
     };
   }, [loadContacts]);
 
+  const handleToggleOrderByCategory = useCallback((event) => {
+    const selectedValue = event.target.value;
+
+    if (selectedValue === selectedCategory) {
+      return;
+    }
+
+    setSelectedCategory(selectedValue);
+  }, [selectedCategory]);
+
   function handleChangeSearchTerm(event) {
     setIsLoading(true);
     setSearchTerm(event.target.value);
@@ -126,6 +127,11 @@ export default function useHome() {
 
   function handleCloseDeleteModal() {
     setIsDeleteModalVisible(false);
+  }
+
+  function handleToggleSideBar() {
+    console.log('Clicou');
+    setIsSideBarVisible(!isSideBarVisible);
   }
 
   async function handleDeleteConfirmContact() {
@@ -173,5 +179,7 @@ export default function useHome() {
     isLoadingCategories,
     selectedCategory,
     categories,
+    handleToggleSideBar,
+    isSideBarVisible,
   };
 }

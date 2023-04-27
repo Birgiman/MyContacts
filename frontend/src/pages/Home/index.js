@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable no-nested-ternary */
-
 import useHome from './useHome';
 
 import Loader from '../../components/Loader';
@@ -16,6 +15,7 @@ import ErrorStatus from './components/ErrorStatus';
 import EmptyList from './components/EmptyList';
 import SearchNotFound from './components/SearchNotFound';
 import ContactsList from './components/ContactsList';
+import SideBar from '../../components/SideBar';
 
 export default function Home() {
   const {
@@ -39,6 +39,8 @@ export default function Home() {
     setCategories,
     isLoadingCategories,
     categories,
+    handleToggleSideBar,
+    isSideBarVisible,
   } = useHome();
 
   const hasContacts = contacts.length > 0;
@@ -47,6 +49,11 @@ export default function Home() {
 
   return (
     <Container>
+
+      <SideBar
+        onToggleCloseSideBar={handleToggleSideBar}
+        visible={isSideBarVisible}
+      />
 
       <Loader isLoading={isLoading} />
 
@@ -80,9 +87,7 @@ export default function Home() {
           isLoadingCategories={isLoadingCategories}
           categories={categories}
         />
-          {/* {console.log('IndexHome', { selectedCategory })}
-          {console.log('IndexHome', { atualizaCategoria })}
-          {console.log('IndexHome', { isLoadingCategories })} */}
+
         {isSearchEmpty && <SearchNotFound searchTerm={searchTerm} />}
 
         <Modal
