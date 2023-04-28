@@ -15,7 +15,6 @@ import ErrorStatus from './components/ErrorStatus';
 import EmptyList from './components/EmptyList';
 import SearchNotFound from './components/SearchNotFound';
 import ContactsList from './components/ContactsList';
-import SideBar from '../../components/SideBar';
 
 export default function Home() {
   const {
@@ -47,8 +46,6 @@ export default function Home() {
 
   return (
     <Container>
-
-      <SideBar />
 
       <Loader isLoading={isLoading} />
 

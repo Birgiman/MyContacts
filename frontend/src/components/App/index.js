@@ -8,6 +8,7 @@ import { Container } from './styles';
 import Header from '../Header';
 import Router from '../../Router';
 import ToastContainer from '../Toast/ToastContainer';
+import SideBar from '../SideBar';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <GlobalStyles />
         <ToastContainer />
         <Container>
+          <SideBar />
           <Header />
           <Router />
         </Container>

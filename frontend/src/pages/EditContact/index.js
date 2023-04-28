@@ -2,7 +2,6 @@ import ContactForm from '../../components/ContactForm';
 import PageHeader from '../../components/PageHeader';
 import Loader from '../../components/Loader';
 import useEditContact from './useEditContact';
-import SideBar from '../../components/SideBar';
 
 export default function EditContact() {
   const {
@@ -16,8 +15,6 @@ export default function EditContact() {
     <>
 
       <Loader isLoading={isLoading} />
-
-      <SideBar />
 
       <PageHeader
         title={isLoading ? 'Carregando...' : `Editar ${contactName}`}
