@@ -21,7 +21,6 @@ export default function useHome() {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [isLoadingCategories, setIsLoadingCategories] = useState(true);
-  const [isSideBarVisible, setIsSideBarVisible] = useState(false);
 
   const deferredSeacrhTerm = useDeferredValue(searchTerm);
 
@@ -129,11 +128,6 @@ export default function useHome() {
     setIsDeleteModalVisible(false);
   }
 
-  function handleToggleSideBar() {
-    console.log('Clicou');
-    setIsSideBarVisible(!isSideBarVisible);
-  }
-
   async function handleDeleteConfirmContact() {
     try {
       setIsLoadingDelete(true);
@@ -179,7 +173,5 @@ export default function useHome() {
     isLoadingCategories,
     selectedCategory,
     categories,
-    handleToggleSideBar,
-    isSideBarVisible,
   };
 }

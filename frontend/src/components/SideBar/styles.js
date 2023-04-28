@@ -5,9 +5,32 @@ const fadeIn = keyframes`
   100% {transform: translateX(0);}
 `;
 
+const overlayFadeIn = keyframes`
+  0% {backdrop-filter: blur();}
+  100% {backdrop-filter: blur(5px);}
+`;
+
+const ListContainerFadeIn = keyframes`
+  0% {transform: translateX(100%);}
+  70% {transform: translateX(-15%)}
+  100% {transform: translateX(0);}
+`;
+
 const fadeOut = keyframes`
   0% {transform: translateX(0);}
+  40% {transform: translateX(0)}
   100% {transform: translateX(100%);}
+`;
+
+const ListContainerAnimation = keyframes`
+  0% {transform: translateX(0);}
+  30% {transform: translateX(-15%)}
+  100% {transform: translateX(100%);}
+`;
+
+const overlayFadeOut = keyframes`
+  0% {backdrop-filter: blur(5px);}
+  100% {backdrop-filter: blur();}
 `;
 
 export const SideBarStyle = styled.div`
@@ -15,17 +38,17 @@ export const SideBarStyle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: end;
-  top: 32px;
-  right: 22px;
+  top: 42px;
+  right: 50px;
   z-index: 1;
+
 
 
   > Button {
     background: none;
     height: 24px;
     padding: 0;
-    box-shadow: none;
-    border-radius: none;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
 
     &:hover {
     background: none;
@@ -34,8 +57,6 @@ export const SideBarStyle = styled.div`
 `;
 
 export const Overlay = styled.div`
-
-  ${({ enable }) => enable && css`
   backdrop-filter: blur(5px);
   width: 100%;
   height: 100%;
@@ -48,13 +69,17 @@ export const Overlay = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-end;
+
+  animation: ${overlayFadeIn} 0.3s;
+
+  ${({ isLeaving }) => isLeaving && css`
+    animation: ${overlayFadeOut} 0.2s forwards;
   `}
 
 `;
 
 export const Container = styled.div`
 
-${({ enable }) => enable && css`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -66,13 +91,12 @@ ${({ enable }) => enable && css`
   width: 100%;
   max-width: 300px;
   height: 100%;
-  margin-top: 24px;
-  `}
 
-  animation: ${fadeIn} 0.5s;
+
+  animation: ${fadeIn} 0.3s;
 
   ${({ isLeaving }) => isLeaving && css`
-    animation: ${fadeOut} 0.5s forwards;
+    animation: ${fadeOut} 0.3s forwards;
   `}
 `;
 
@@ -83,8 +107,13 @@ export const ListContainer = styled.div`
 
   width: 100%;
   max-width: 200px;
+  height: 100%;
+  margin-top: 106px;
+  animation: ${ListContainerFadeIn} 0.5s;
 
-  margin-top: 48px;
+  ${({ isLeaving }) => isLeaving && css`
+    animation: ${ListContainerAnimation} 0.2s forwards;
+  `}
 
   Button {
     display: flex;
@@ -94,6 +123,7 @@ export const ListContainer = styled.div`
     padding: 0;
     border-radius: 8px;
     background: none;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     border: 2px solid ${({ theme }) => theme.colors.primary.main};
 
     font-weight: normal;
@@ -107,15 +137,22 @@ export const ListContainer = styled.div`
       background: ${({ theme }) => theme.colors.primary.dark};
     }
 
-    &[disabled] {
-      background: #ccc !important;
-      cursor: default !important;
-      min-width: 92.66px;
-    }
+    ${({ disable }) => disable && css`
+    cursor: default;
+    background: red;
+  `}
+
   }
+
   Button + Button {
     margin-top: 16px;
   }
+
+  Button:last-of-type {
+  margin-top: auto;
+  margin-bottom: 48px;
+}
+
 
   a {
     display: flex;

@@ -1,5 +1,6 @@
 import ContactForm from '../../components/ContactForm';
 import PageHeader from '../../components/PageHeader';
+import SideBar from '../../components/SideBar';
 import useNewContact from './useNewContact';
 
 export default function NewContact() {
@@ -11,6 +12,9 @@ export default function NewContact() {
 
   return (
     <>
+
+      <SideBar />
+
       <PageHeader
         title="Novo contato"
       />

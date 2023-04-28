@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import useAnimatedUnmount from '../../hooks/useAnimatedUnmount';
 
 import {
@@ -10,46 +10,46 @@ import sidebar from '../../assets/images/icons/side-bar.svg';
 import ReactPortal from '../ReactPortal';
 import Button from '../Button';
 
-export default function SideBar({ visible, onToggleCloseSideBar }) {
-  const { shouldRender, animatedElementRef } = useAnimatedUnmount(visible);
+export default function SideBar() {
+  const [isSideBarVisible, setIsSideBarVisible] = useState(false);
 
-  console.log({ visible, shouldRender });
+  const { shouldRender, animatedElementRef } = useAnimatedUnmount(isSideBarVisible);
+
+  function handleToggleSideBar() {
+    setIsSideBarVisible(!isSideBarVisible);
+  }
 
   return (
     <>
       <SideBarStyle>
-        <Button type="button" onClick={onToggleCloseSideBar}>
+        <Button type="button" onClick={handleToggleSideBar}>
           <img src={sidebar} alt="Side bar" width="28" />
         </Button>
       </SideBarStyle>
       {shouldRender && (
       <ReactPortal containerId="sidebar-root">
-        <Overlay enable={visible}>
+        <Overlay
+          isLeaving={!isSideBarVisible}
+          ref={animatedElementRef}
+        >
           <Container
-            enable={visible}
-            isLeaving={!visible}
+            enable={isSideBarVisible}
+            isLeaving={!isSideBarVisible}
             ref={animatedElementRef}
           >
-            <ListContainer>
-              {visible && (
-                <>
-                  <Button type="button">
-                    <Link to="/">Home</Link>
-                  </Button>
-                  <Button type="button">
-                    <Link to="/new">Novo Contato</Link>
-                  </Button>
-                  <Button type="button">
-                    <Link to="/new">Novo Contato</Link>
-                  </Button>
-                  <Button type="button">
-                    <Link to="/new">Novo Contato</Link>
-                  </Button>
-                  <Button type="button">
-                    <Link to="/new">Novo Contato</Link>
-                  </Button>
-                </>
-              )}
+            <ListContainer
+              isLeaving={!isSideBarVisible}
+              ref={animatedElementRef}
+            >
+              <Button type="button">
+                <Link to="/">Home</Link>
+              </Button>
+              <Button type="button">
+                <Link to="/new">Novo Contato</Link>
+              </Button>
+              <Button type="button">
+                <Link to="/about">Sobre</Link>
+              </Button>
             </ListContainer>
           </Container>
         </Overlay>
@@ -58,8 +58,3 @@ export default function SideBar({ visible, onToggleCloseSideBar }) {
     </>
   );
 }
-
-SideBar.propTypes = {
-  visible: PropTypes.bool.isRequired,
-  onToggleCloseSideBar: PropTypes.func.isRequired,
-};

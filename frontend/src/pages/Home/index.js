@@ -39,8 +39,6 @@ export default function Home() {
     setCategories,
     isLoadingCategories,
     categories,
-    handleToggleSideBar,
-    isSideBarVisible,
   } = useHome();
 
   const hasContacts = contacts.length > 0;
@@ -50,10 +48,7 @@ export default function Home() {
   return (
     <Container>
 
-      <SideBar
-        onToggleCloseSideBar={handleToggleSideBar}
-        visible={isSideBarVisible}
-      />
+      <SideBar />
 
       <Loader isLoading={isLoading} />
 
