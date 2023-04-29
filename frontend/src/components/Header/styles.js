@@ -6,4 +6,8 @@ export const Container = styled.header`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  img {
+    filter: drop-shadow(0px 0px 0.7px white);
+  }
 `;

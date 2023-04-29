@@ -1,8 +1,10 @@
 import { ThemeProvider } from 'styled-components';
 import { BrowserRouter } from 'react-router-dom';
 
+import { useState } from 'react';
 import GlobalStyles from '../../assets/styles/global';
-import defaultTheme from '../../assets/styles/themes/default';
+import light from '../../assets/styles/themes/light';
+import dark from '../../assets/styles/themes/dark';
 import { Container } from './styles';
 
 import Header from '../Header';
@@ -17,13 +19,28 @@ function App() {
     isLoading,
   } = useHome();
 
+  const [theme, setTheme] = useState('light');
+
+  function handleToogleTheme() {
+    let selectedTheme;
+    if (theme) {
+      selectedTheme = theme === 'light'
+        ? setTheme('dark')
+        : setTheme('light');
+    }
+    return selectedTheme;
+  }
+
+  const themeObject = theme === 'light' ? light : dark;
+
   return (
     <BrowserRouter>
-      <ThemeProvider theme={defaultTheme}>
+      <ThemeProvider theme={themeObject}>
         <GlobalStyles />
         <ToastContainer />
         <Container>
-          {!hasError && !isLoading && <SideBar />}
+          {!hasError && !isLoading
+          && <SideBar onToggleTheme={handleToogleTheme} />}
           <Header />
           <Router />
         </Container>

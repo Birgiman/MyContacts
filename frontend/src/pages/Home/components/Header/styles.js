@@ -15,22 +15,15 @@ export const ContactsContainer = styled.div`
   justify-content: center;
 
     .all-contacts {
-
-    font-size: 24px;
+      font-size: 24px;
+      color: ${({ theme }) => theme.colors.gray[1000]};
     }
+
     .filtered-contacts {
-
       font-size: 12px;
-    display: flex;
-    color: ${({ theme }) => theme.colors.gray[500]};
+      display: flex;
+      color: ${({ theme }) => theme.colors.gray[1000]};
     }
-
-
-  span {
-    font-size: 12px;
-    display: flex;
-    color: ${({ theme }) => theme.colors.gray[500]};
-  }
 `;
 
 export const LinkContainer = styled.div`

@@ -42,8 +42,6 @@ export default function useHome() {
     return filteredByCategory;
   }, [contacts, deferredSeacrhTerm, selectedCategory]);
 
-  console.log({ isLoading });
-
   const loadCategories = useCallback(async () => {
     const controller = new AbortController();
 

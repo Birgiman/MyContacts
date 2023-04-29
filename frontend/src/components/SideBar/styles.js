@@ -106,7 +106,7 @@ export const ListContainer = styled.div`
 
   width: 100%;
   max-width: 200px;
-  height: 100%;
+  height: 80%;
   margin-top: 106px;
   animation: ${ListContainerFadeIn} 0.5s;
 
@@ -149,7 +149,6 @@ export const ListContainer = styled.div`
 
   Button:last-of-type {
   margin-top: auto;
-  margin-bottom: 48px;
 }
 
 

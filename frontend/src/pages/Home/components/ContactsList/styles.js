@@ -68,6 +68,10 @@ export const Card = styled.div`
       display: flex;
       align-items: center;
 
+      strong {
+        color: ${({ theme }) => theme.colors.gray[900]};
+      }
+
       small {
         background: ${({ theme }) => theme.colors.primary.lighter};
         color: ${({ theme }) => theme.colors.primary.main};

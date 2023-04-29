@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import useAnimatedUnmount from '../../hooks/useAnimatedUnmount';
 
 import {
@@ -10,7 +11,7 @@ import sidebar from '../../assets/images/icons/side-bar.svg';
 import ReactPortal from '../ReactPortal';
 import Button from '../Button';
 
-export default function SideBar() {
+export default function SideBar({ onToggleTheme }) {
   const [isSideBarVisible, setIsSideBarVisible] = useState(false);
 
   const { shouldRender, animatedElementRef } = useAnimatedUnmount(isSideBarVisible);
@@ -48,6 +49,9 @@ export default function SideBar() {
               <Button type="button" onClick={handleToggleSideBar}>
                 <Link to="/new">Novo Contato</Link>
               </Button>
+              <Button type="button" onClick={onToggleTheme}>
+                <Link to="/">Tema</Link>
+              </Button>
               <Button type="button" onClick={handleToggleSideBar}>
                 <Link to="/about">Sobre</Link>
               </Button>
@@ -59,3 +63,7 @@ export default function SideBar() {
     </>
   );
 }
+
+SideBar.propTypes = {
+  onToggleTheme: PropTypes.func.isRequired,
+};
