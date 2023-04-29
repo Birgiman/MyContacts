@@ -42,26 +42,34 @@ export default function useHome() {
     return filteredByCategory;
   }, [contacts, deferredSeacrhTerm, selectedCategory]);
 
-  useEffect(() => {
+  console.log({ isLoading });
+
+  const loadCategories = useCallback(async () => {
     const controller = new AbortController();
 
-    async function loadCategories() {
-      try {
-        const categoriesList = await CategoriesService.listCategories(controller.signal);
+    try {
+      const categoriesList = await CategoriesService.listCategories(controller.signal);
 
-        setCategories(categoriesList);
-      } catch {
-      } finally {
-        setIsLoadingCategories(false);
-      }
+      setCategories(categoriesList);
+    } catch {
+    } finally {
+      setIsLoadingCategories(false);
     }
-
-    loadCategories();
 
     return () => {
       controller.abort();
     };
   }, [setCategories, setIsLoadingCategories]);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    loadCategories(controller.signal);
+
+    return () => {
+      controller.abort();
+    };
+  }, [loadCategories]);
 
   const loadContacts = useCallback(async (signal) => {
     try {

@@ -56,11 +56,13 @@ export default function Home() {
         />
       )}
 
-      <Header
-        hasError={hasError}
-        qtyOfContacts={contacts.length}
-        qtyOfFilteredContacts={filteredContacts.length}
-      />
+      {!hasError && (
+        <Header
+          hasError={hasError}
+          qtyOfContacts={contacts.length}
+          qtyOfFilteredContacts={filteredContacts.length}
+        />
+      )}
 
       {hasError && <ErrorStatus onTryAgain={handleTryAgain} />}
       {isListEmpty && <EmptyList />}

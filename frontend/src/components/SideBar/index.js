@@ -31,23 +31,24 @@ export default function SideBar() {
         <Overlay
           isLeaving={!isSideBarVisible}
           ref={animatedElementRef}
+          onClick={handleToggleSideBar}
         >
           <Container
-            enable={isSideBarVisible}
             isLeaving={!isSideBarVisible}
             ref={animatedElementRef}
+            onClick={(event) => event.stopPropagation()}
           >
             <ListContainer
               isLeaving={!isSideBarVisible}
               ref={animatedElementRef}
             >
-              <Button type="button">
+              <Button type="button" onClick={handleToggleSideBar}>
                 <Link to="/">Home</Link>
               </Button>
-              <Button type="button">
+              <Button type="button" onClick={handleToggleSideBar}>
                 <Link to="/new">Novo Contato</Link>
               </Button>
-              <Button type="button">
+              <Button type="button" onClick={handleToggleSideBar}>
                 <Link to="/about">Sobre</Link>
               </Button>
             </ListContainer>

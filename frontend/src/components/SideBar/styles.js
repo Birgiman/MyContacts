@@ -48,7 +48,7 @@ export const SideBarStyle = styled.div`
     background: none;
     height: 24px;
     padding: 0;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+
 
     &:hover {
     background: none;
@@ -91,7 +91,6 @@ export const Container = styled.div`
   width: 100%;
   max-width: 300px;
   height: 100%;
-
 
   animation: ${fadeIn} 0.3s;
 

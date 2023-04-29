@@ -9,15 +9,21 @@ import Header from '../Header';
 import Router from '../../Router';
 import ToastContainer from '../Toast/ToastContainer';
 import SideBar from '../SideBar';
+import useHome from '../../pages/Home/useHome';
 
 function App() {
+  const {
+    hasError,
+    isLoading,
+  } = useHome();
+
   return (
     <BrowserRouter>
       <ThemeProvider theme={defaultTheme}>
         <GlobalStyles />
         <ToastContainer />
         <Container>
-          <SideBar />
+          {!hasError && !isLoading && <SideBar />}
           <Header />
           <Router />
         </Container>

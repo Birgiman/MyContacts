@@ -20,7 +20,9 @@ export default function Header({ hasError, qtyOfContacts, qtyOfFilteredContacts 
           {qtyOfContacts !== qtyOfFilteredContacts && (
             <strong className="filtered-contacts">
               {qtyOfFilteredContacts === 0 ? '' : qtyOfFilteredContacts}
-              {qtyOfFilteredContacts === 0 ? ' Nada para filtrar!' : ' filtrados!'}
+              {qtyOfFilteredContacts === 0
+                ? ' Nada para filtrar!'
+                : (qtyOfFilteredContacts === 1 ? ' Filtrado!' : ' filtrados!')}
             </strong>
           )}
         </ContactsContainer>
