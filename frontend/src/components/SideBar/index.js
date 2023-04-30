@@ -50,7 +50,7 @@ export default function SideBar({ onToggleTheme }) {
                 <Link to="/new">Novo Contato</Link>
               </Button>
               <Button type="button" onClick={onToggleTheme}>
-                <Link to="/">Tema</Link>
+                <span>Tema</span>
               </Button>
               <Button type="button" onClick={handleToggleSideBar}>
                 <Link to="/about">Sobre</Link>

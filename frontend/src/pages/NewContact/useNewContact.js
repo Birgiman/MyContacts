@@ -6,9 +6,15 @@ import toast from '../../utils/toast';
 export default function useNewContact() {
   const contactFormRef = useRef(null);
 
-  async function handleSubmit(contact) {
+  async function handleSubmit(contact, qtyOfContacts = 1000) {
     try {
-      await ContactsService.createContact(contact);
+      const promises = [];
+
+      for (let i = 0; i < qtyOfContacts; i += 1) {
+        promises.push(ContactsService.createContact(contact));
+      }
+
+      await Promise.all(promises);
 
       contactFormRef.current.resetFields();
 
@@ -26,34 +32,8 @@ export default function useNewContact() {
     }
   }
 
-  // async function handleMultipleSubmit(contact) {
-  //   try {
-  //     const promises = [];
-
-  //     for (let i = 0; i < 1000; i += 1) {
-  //       const promise = handleSubmit(contact);
-  //       promises.push(promise);
-  //     }
-
-  //     await Promise.all(promises);
-  //   } catch {
-  //     toast({
-  //       type: 'danger',
-  //       text: 'Ocorreu os contatos!',
-  //       duration: 7000,
-  //     });
-  //   } finally {
-  //     toast({
-  //       type: 'success',
-  //       text: 'Todos os contatos foram cadastrados com sucesso!',
-  //       duration: 5000,
-  //     });
-  //   }
-  // }
-
   return {
     contactFormRef,
     handleSubmit,
-    // handleMultipleSubmit,
   };
 }

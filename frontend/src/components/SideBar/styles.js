@@ -151,6 +151,23 @@ export const ListContainer = styled.div`
   margin-top: auto;
 }
 
+  span {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: ${({ theme }) => theme.colors.primary.main};
+
+    &:hover {
+    color: #fff;
+    }
+    &:active {
+      color: #fff;
+    }
+    }
 
   a {
     display: flex;
