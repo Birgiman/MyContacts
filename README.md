@@ -196,9 +196,9 @@ Vale lembrar também da criação das rotas utilizando o `node:path`, `express` 
 
 - Lançamento da v1.0 ✅
 - Versão responsiva ✅
-- Adicionar **autenticação de usuários** 🔲
+- Adicionar **nova tela de SOBRE** ✅
 - Adicionar **nova tela de gerenciar categorias** 🔲
-- Adicionar **nova tela de SOBRE** 🔲
+- Adicionar **autenticação de usuários** 🔲
 </div>
 
 <div id='status'>
