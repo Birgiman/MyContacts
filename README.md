@@ -77,9 +77,21 @@ E para iniciar o _frontend_ basta rodar `yarn start` em sua respectiva pasta.
 <div id='stack_utilizada'>
 <h2>Stack utilizada</h2>
 
-* **Front-end:** React, Styled-Components, PropTypes e Cros-env.
+**Front-end:**
+<ul id="frontend-stack">
+	<li>React</li>
+	<li>Styled-Components</li>
+	<li>PropTypes</li>
+	<li>Cros-env</li>
+</ul>
 
-* **Back-end:** Node.js, Express, Docker e Postgres.
+**Back-end:**
+<ul id="backend-stack">
+	<li>Node.js</li>
+	<li>Express</li>
+	<li>Docker</li>
+	<li>Postgres</li>
+</ul>
 
 > Em ambos foram utilizados o EditorConfig e Eslint para o desenvolvimento.
 
