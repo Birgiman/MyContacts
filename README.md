@@ -82,7 +82,7 @@ E para iniciar o _frontend_ basta rodar `yarn start` em sua respectiva pasta.
 	<li>React</li>
 	<li>Styled-Components</li>
 	<li>PropTypes</li>
-	<li>Cros-env</li>
+	<li>Cross-Env</li>
 </ul>
 
 **Back-end:**
