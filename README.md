@@ -70,7 +70,7 @@ Lembre-se de alterar as rotas da aplicação nos arquivos:
 E mais um detalhe, a porta padrão do _frontend_ foi definida para `:3001`, e do _backend_ para `:3000`.
 
 Pronto, agora você está preparado para utilizar esta aplicação.
-Para iniciaro _backend_ basta rodar `yarn dev` ou `yarn docker` caso o processo do Docker esteja parado no Windows, em sua respectiva pasta.
+Para iniciar o _backend_ basta rodar `yarn dev` ou `yarn docker` caso o processo do Docker esteja parado no Windows, em sua respectiva pasta.
 E para iniciar o _frontend_ basta rodar `yarn start` em sua respectiva pasta.  
 
 </div>
